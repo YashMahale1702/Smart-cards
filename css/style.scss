@@ -1,115 +1,176 @@
+//* MEDIA QUERY MANAGER
+
+@mixin respond($breakpoint) {
+	@if $breakpoint == phone {
+		//*600px
+		@media only screen and (max-width: 37.5em) {
+			@content;
+		}
+	}
+	@if $breakpoint == tab-port {
+		//*900px
+		@media only screen and (max-width: 56.25em) {
+			@content;
+		}
+	}
+	@if $breakpoint == tab-land {
+		//*1200px
+		@media only screen and (max-width: 75em) {
+			@content;
+		}
+	}
+	@if $breakpoint == big-desktop {
+		//*1800px
+		@media only screen and (min-width: 112.5em) {
+			@content;
+		}
+	}
+}
+
+// Actual CSS starts here
+//General and necessary styling
+
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 html {
-    font-size: 62.5%;
+	font-size: 62.5%;
+	// *  1 rem : 10px
+
+	@include respond(big-desktop) {
+		// *1 rem : 12px  beyond 1200
+		font-size: 75%;
+	}
+
+	@include respond(tab-land) {
+		// *1 rem : 9px  1200px
+		font-size: 56.25%;
+	}
+
+	@include respond(tab-port) {
+		// *1 rem : 8px  900px
+		font-size: 50%;
+	}
+
+	@include respond(phone) {
+		// *1 rem : 6px 600px
+		font-size: 37.5%;
+	}
 }
 
 body {
-    font-weight: 400;
-    font-family: 'Quicksand', sans-serif;
+	font-weight: 400;
+	font-family: 'Quicksand', sans-serif;
 }
 
-.heading {
-    width: 80%;
-    margin: 3rem auto;
-    font-size: 4.5rem;
-    font-weight: 500;
-    text-align: center;
-    text-transform: capitalize;
-}
+/////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-.cards {
-    width: 75%;
-    margin: 0 auto;
-    margin-bottom: 10rem;
+//Styles for HTML classes starts here
 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-    gap: 7rem;
+.heading {
+	width: 80%;
+	margin: 3rem auto;
+	font-size: 4.5rem;
+	font-weight: 700;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+.cards {
+	width: 80%;
+	margin: 0 10vw;
+	margin-bottom: 10rem;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+	gap: 5rem;
 }
 
 .card {
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 1.5rem 4rem rgba($color: #000000, $alpha: 0.15);
-    transform: translateY(0);
-    transition: all 0.3s ease;
-    will-change: transform, box-shadow;
+	border-radius: 1rem;
+	overflow: hidden;
+	box-shadow: 0 1.5rem 4rem rgba($color: #000000, $alpha: 0.1);
+	transform: translateY(0);
+	transition: all 0.3s ease;
+	will-change: transform, box-shadow;
 
-    &:hover {
-        transform: translateY(-1rem);
-        box-shadow: 0 1.5rem 4rem rgba($color: #000000, $alpha: 0.3);
-    }
+	&:hover {
+		transform: translateY(-1rem);
+		box-shadow: 0 1.5rem 4rem rgba($color: #000000, $alpha: 0.2);
+	}
 
-    &_img {
-        width: 100%;
-        // height: 25rem;
-    }
+	&_img {
+		width: 100%;
+		// height: 25rem;
+	}
 
-    &_container {
-        margin: 2rem 2.5rem;
+	&_container {
+		margin: 2rem 2.5rem;
 
-        & > * {
-            margin-bottom: 1.5rem;
-        }
-    }
+		& > * {
+			margin-bottom: 1.5rem;
+		}
+	}
 
-    &_heading {
-        font-size: 2.3rem;
-        font-weight: 600;
-        line-height: 1;
-        word-spacing: 1;
-        text-transform: capitalize;
-    }
+	&_heading {
+		font-size: 2.3rem;
+		font-weight: 600;
+		line-height: 1;
+		word-spacing: 1;
+		text-transform: capitalize;
+	}
 
-    &_chips {
-        color: orange;
-        font-size: 1.2rem;
-        text-transform: capitalize;
-        font-weight: 600;
+	&_chips {
+		color: orange;
+		font-size: 1.2rem;
+		text-transform: capitalize;
+		font-weight: 600;
 
-        span {
-            border-radius: 100px;
-            background-color: white;
-            border: 2px solid orange;
-            padding: 0.3rem 0.6rem;
-            margin-right: 0.3rem;
-        }
-    }
+		span {
+			border-radius: 100px;
+			background-color: white;
+			border: 2px solid orange;
+			padding: 0.3rem 0.6rem;
+			margin-right: 0.3rem;
+		}
+	}
 
-    &_description {
-        font-size: 1.6rem;
-        font-weight: 600;
-    }
+	&_description {
+		font-size: 1.6rem;
+		font-weight: 600;
+	}
 
-    &_cta {
-        padding: 0.8rem 1.2rem;
-        background-color: white;
-        color: orange;
-        outline: none;
-        border: 2px solid orange;
-        border-radius: 0.5rem;
-        cursor: pointer;
+	&_cta {
+		padding: 0.8rem 1.2rem;
+		background-color: white;
+		color: orange;
+		outline: none;
+		border: 2px solid orange;
+		border-radius: 0.5rem;
+		cursor: pointer;
 
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
 
-        span {
-            font-size: 1.4rem;
-            padding-left: 0.7rem;
-        }
-    }
+		&_icon {
+			font-size: 1.4rem;
+		}
 
-    &_icon {
-        fill: white;
-        height: 2rem;
-        width: 2rem;
-    }
+		&_text {
+			font-size: 1.4rem;
+			padding-left: 0.7rem;
+		}
+	}
+
+	&_icon {
+		fill: white;
+		height: 2rem;
+		width: 2rem;
+	}
 }
